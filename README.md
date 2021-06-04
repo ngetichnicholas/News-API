@@ -1,4 +1,4 @@
-# Watchlist
+# News-API
 ## Author
 Nicholas Ngetich
 ## Description
