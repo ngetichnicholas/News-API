@@ -10,5 +10,27 @@
 {% block content %}
   <div class="container">
     <h1>Welcome to News Room</h1>
+    <div class="row">
+      <div class="col-md-2">
+        <h3>Breaking News</h3>
+        <ul>
+          {{ macro.displayNewsList(breaking)}}
+        </ul>
+        <h3>Trending News</h3>
+        <ul>
+          {{ macro.displayNewsList(trending)}}
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h3>Politic News</h3>
+        <ul>
+          {{ macro.displayNewsList(politic)}}
+        </ul>
+        <h3>Technology News</h3>
+        <ul>
+          {{ macro.displayNewsList(technology)}}
+        </ul>
+      </div>
+    </div>
   </div>
 {% endblock %}
