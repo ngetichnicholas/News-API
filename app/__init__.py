@@ -20,3 +20,4 @@ def create_app(config_name):
 
   #Setting config
   
+  return app
