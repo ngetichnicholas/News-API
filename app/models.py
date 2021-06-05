@@ -11,3 +11,9 @@ class News:
     self.urlToImage = urlToImage
     self.puplishedAt = publishedAt
     self.content = content
+
+class Source:
+  def __init__(self,id,name):
+    self.id = id
+    self.name = name
+      
