@@ -2,21 +2,20 @@
 {% for source_row in source_list |batch(4)%}
 <div class="row">
 	{% for sources in source_row %}
-	<div class="col-md-3">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>{{ sources.name}}</h3>
-			</div>
-			<div class="panel-body">
-				<p>
-					{{ sources.description |truncate(100)}}
-				</p>
-				<a href="/sources/{{sources.id}}" class="btn btn-outline-primary">View news Articles here</a>
-			</div>
+	<div class="col-md-3 card">
+		<div>
+			<h3>{{ sources.name}}</h3>
+		</div>
+		<div>
+			<p>
+				{{ sources.description |truncate(100)}}
+			</p>
+			<h3>{{ sources.name}}</h3>
+			<h3>{{ sources.name}}</h3>
+			<button class="btn btn-outline-primary"><a href="/sources/{{sources.id}}">View {{ sources.name}} articles</a></button>
 		</div>
 	</div>
 	{% endfor %}
 </div>
 {% endfor %}
 {% endmacro %}
-

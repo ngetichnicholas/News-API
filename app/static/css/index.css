@@ -4,6 +4,12 @@ ul {
   display: flex;
   flex-direction: column;
 }
+h2 {
+  color: #032541;
+}
+h3 {
+  color: blue !important;
+}
 li a {
   font-size: 20px;
 }
