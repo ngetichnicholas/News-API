@@ -1,34 +1,33 @@
 {% extends 'base.html'%}
 {% import 'macros.html' as macro%}
+
 <!-- Styles block -->
-
 {% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}"/>
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" />
 {% endblock %}
-<!-- Content block -->
 
+<!-- Content block -->
 {% block content%}
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h3> Technology</h3>
-            {{ macro.displaySourceList(technology)}}
+            <h3>Sports</h3>
+            {{ macro.displaySourceList(sports)}}
         </div>
         <div class="col-md-6">
-            <h3> Business</h3>
-            {{ macro.displaySourceList(business)}}
+            <h3> Technology</h3>
+            {{ macro.displaySourceList(technology)}}
         </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-            <h3>Sports</h3>
-            <hr>
-            {{ macro.displaySourceList(sports)}}
-        </div>
-        <div class="col-md-6">
             <h3>Entertainment</h3>
             {{ macro.displaySourceList(entertainment)}}
+        </div>
+        <div class="col-md-6">
+            <h3> Business</h3>
+            {{ macro.displaySourceList(business)}}
         </div>
     </div>
 </div>
