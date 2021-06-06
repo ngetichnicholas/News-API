@@ -2,7 +2,6 @@ class NewsSource:
     '''
     NewsSource class to define NewsSource Objects
     '''
-
     def __init__(self,id,name,description,url,category,country):
         self.id =id
         self.name = name

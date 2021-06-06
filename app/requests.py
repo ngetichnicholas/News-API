@@ -1,6 +1,6 @@
 import urllib.request,json
 from .models import NewsSource,NewsArticle
-from datetime import datetime
+from datetime import date
 
 #getting the api key
 api_key = None
@@ -17,48 +17,46 @@ def configure_request(app):
 	base_url = app.config['SOURCE_BASE_URL']
 	articles_url = app.config['ARTICLE_BASE_URL']
 
-def get_sources(category):
+def get_news_source(category):
 	'''
 	Function that gets the json response to our url request
 	'''
-	get_sources_url = base_url.format(category,api_key)
+	get_news_source_url = base_url.format(category,api_key)
 
-	with urllib.request.urlopen(get_sources_url) as url:
-		get_sources_data = url.read()
-		get_sources_response = json.loads(get_sources_data)
+	with urllib.request.urlopen(get_news_source_url) as url:
+		get_news_source_data = url.read()
+		get_news_source_response = json.loads(get_news_source_data)
 
-		sources_results = None
+		news_source_results = None
 
-		if get_sources_response['sources']:
-			sources_results_list = get_sources_response['sources']
-			sources_results = process_sources(sources_results_list)
+		if get_news_source_response['sources']:
+			news_source_results_list = get_news_source_response['sources']
+			news_source_results = process_news_source(news_source_results_list)
 
-	return sources_results
+	return news_source_results
 
-def process_sources(sources_list):
+def process_news_source(news_source_list):
 	'''
 	Function that processes the news sources results and turns them into a list of objects
 	Args:
-		sources_list: A list of dictionaries that contain sources details
+		news_source_list: A list of dictionaries that contain sources details
 	Returns:
-		sources_results: A list of sources objects
+		news_source_results: A list of sources objects
 	'''
-	sources_results = []
+	news_source_results = []
 
-	for source_item in sources_list:
-		id = source_item.get('id') 
-		name = source_item.get('name')
-		description = source_item.get('description')
-		url = source_item.get('url')
-		category = source_item.get('category')
-		country = source_item.get('country')
+	for news_source_item in news_source_list:
+		id = news_source_item.get('id') 
+		name = news_source_item.get('name')
+		description = news_source_item.get('description')
+		url = news_source_item.get('url')
+		category = news_source_item.get('category')
+		country = news_source_item.get('country')
 
+		news_source_object = NewsSource(id,name,description,url,category,country)
+		news_source_results.append(news_source_object)
 
-		sources_object = NewsSource(id,name,description,url,category,country)
-		sources_results.append(sources_object)
-
-
-	return sources_results
+	return news_source_results
 
 def get_articles(id):
 	'''
@@ -67,30 +65,30 @@ def get_articles(id):
 	get_articles_url = articles_url.format(id,api_key)
 
 	with urllib.request.urlopen(get_articles_url) as url:
-		articles_results = json.loads(url.read())
+		news_article_results = json.loads(url.read())
 
 
-		articles_object = None
-		if articles_results['articles']:
-			articles_object = process_articles(articles_results['articles'])
+		news_article_object = None
+		if news_article_results['articles']:
+			news_article_object = process_news_article(news_article_results['articles'])
 
-	return articles_object
+	return news_article_object
 
-def process_articles(articles_list):
+def process_news_article(news_article_list):
 	'''
 	'''
-	articles_object = []
-	for article_item in articles_list:
-		id = article_item.get('id')
-		author = article_item.get('author')
-		title = article_item.get('title')
-		description = article_item.get('description')
-		url = article_item.get('url')
-		image = article_item.get('urlToImage')
-		date = article_item.get('publishedAt')
+	news_article_object = []
+	for news_article_item in news_article_list:
+		id = news_article_item.get('id')
+		author = news_article_item.get('author')
+		title = news_article_item.get('title')
+		description = news_article_item.get('description')
+		url = news_article_item.get('url')
+		image = news_article_item.get('urlToImage')
+		date = news_article_item.get('publishedAt')
 		
 		if image:
-			articles_result = NewsArticle(id,author,title,description,url,image,date)
-			articles_object.append(articles_result)	
+			news_article_result = NewsArticle(id,author,title,description,url,image,date)
+			news_article_object.append(news_article_result)	
 		
-	return articles_object
+	return news_article_object
