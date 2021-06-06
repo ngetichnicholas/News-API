@@ -1,6 +1,6 @@
 class NewsSource:
     '''
-    Sources class to define Sources Objects
+    NewsSource class to define NewsSource Objects
     '''
 
     def __init__(self,id,name,description,url,category,country):
@@ -13,7 +13,7 @@ class NewsSource:
 
 class NewsArticle:
     '''
-    Articles class to define articles objects
+    NewsArticle class to define articles objects
     '''
     def __init__(self,id,author,title,description,url,image,date):
         self.id = id

@@ -51,7 +51,6 @@ def process_sources(sources_list):
 		description = source_item.get('description')
 		url = source_item.get('url')
 		category = source_item.get('category')
-		language = source_item.get('language')
 		country = source_item.get('country')
 
 

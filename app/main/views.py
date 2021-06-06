@@ -9,15 +9,13 @@ def index():
 	'''
 	view root page function that returns the index the page and its data
 	'''
-	science = get_sources('science')
-	entertainment = get_sources('entertainment')
-	health = get_sources('health')
-	technology = get_sources('technoloy')
+	technology = get_sources('technology')
 	business = get_sources('business')
 	sports = get_sources('sports')
-	title = "News Room"
+	entertainment = get_sources('entertainment')
+	title = "News Highlighter"
 
-	return render_template('index.html',title = title, science = science,entertainment = entertainment,health = health,technology = technology,business= business, sports = sports)
+	return render_template('index.html',title = title, technology = technology,business = business,sports = sports,entertainment = entertainment)
 
 @main.route('/sources/<id>')
 def articles(id):
@@ -27,4 +25,4 @@ def articles(id):
 	articles = get_articles(id)
 	title = f'NH | {id}'
 
-	return render_template('news.html',title= title,articles = articles)
+	return render_template('articles.html',title= title,articles = articles)
