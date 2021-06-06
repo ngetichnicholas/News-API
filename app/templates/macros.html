@@ -8,11 +8,9 @@
 		</div>
 		<div>
 			<p>
-				{{ sources.description |truncate(100)}}
+				{{ sources.description}}
 			</p>
-			<h3>{{ sources.name}}</h3>
-			<h3>{{ sources.name}}</h3>
-			<button class="btn btn-outline-primary"><a href="/sources/{{sources.id}}">View {{ sources.name}} articles</a></button>
+			<a href="/sources/{{sources.id}}"><button class="btn btn-outline-primary">View {{ sources.name}} articles</button></a>
 		</div>
 	</div>
 	{% endfor %}
