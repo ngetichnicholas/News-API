@@ -1,58 +1,97 @@
 import urllib.request,json
-from .models import News
+from .models import NewsSource,NewsArticle
+from datetime import datetime
 
-
-# Getting api key
+#getting the api key
 api_key = None
-# Getting the movie base url
+
+#getting the news base url
 base_url = None
 
+#getting the articlces url
+articles_url = None
+
 def configure_request(app):
-    global api_key,base_url
-    api_key = app.config['NEWS_API_KEY']
-    base_url = app.config['NEWS_API_BASE_URL']
+	global api_key,base_url,articles_url
+	api_key = app.config['NEWS_API_KEY']
+	base_url = app.config['SOURCE_BASE_URL']
+	articles_url = app.config['ARTICLE_BASE_URL']
 
-def get_news(category):
-  '''
-  Function that gets the json response to our url request
-  '''
-  get_news_url = base_url.format(category,api_key)
+def get_sources(category):
+	'''
+	Function that gets the json response to our url request
+	'''
+	get_sources_url = base_url.format(category,api_key)
 
-  with urllib.request.urlopen(get_news_url) as url:
-    get_news_data = url.read()
-    get_news_response = json.loads(get_news_data)
+	with urllib.request.urlopen(get_sources_url) as url:
+		get_sources_data = url.read()
+		get_sources_response = json.loads(get_sources_data)
 
-    news_results = None
+		sources_results = None
 
-    if get_news_response['results']:
-      news_results_list = get_news_response['results']
-      news_results = process_results(news_results_list)
+		if get_sources_response['sources']:
+			sources_results_list = get_sources_response['sources']
+			sources_results = process_sources(sources_results_list)
 
-  return news_results
+	return sources_results
 
-def process_results(news_list):
-  '''
-  Function  that processes the news result and transform them to a list of Objects
+def process_sources(sources_list):
+	'''
+	Function that processes the news sources results and turns them into a list of objects
+	Args:
+		sources_list: A list of dictionaries that contain sources details
+	Returns:
+		sources_results: A list of sources objects
+	'''
+	sources_results = []
 
-  Args:
-      news_list: A list of dictionaries that contain news details
+	for source_item in sources_list:
+		id = source_item.get('id') 
+		name = source_item.get('name')
+		description = source_item.get('description')
+		url = source_item.get('url')
+		category = source_item.get('category')
+		language = source_item.get('language')
+		country = source_item.get('country')
 
-  Returns :
-      news_results: A list of news objects
-  '''
 
-  news_results = []
-  for news_item in news_list:
-    author = news_item.get('author')
-    title = news_item.get('title')
-    description = news_item.get('description')
-    url = news_item.get('url')
-    urlToImage = news_item.get('urlToImage')
-    pulishedAt = news_item.get('puplishedAt')
-    content = news_item.get('content')
+		sources_object = NewsSource(id,name,description,url,category,country)
+		sources_results.append(sources_object)
 
-    news_object = News(author,title,description,url,urlToImage,pulishedAt,content)
-    news_results.append(news_object)
 
-  return news_results
+	return sources_results
 
+def get_articles(id):
+	'''
+	Function that processes the articles and returns a list of articles objects
+	'''
+	get_articles_url = articles_url.format(id,api_key)
+
+	with urllib.request.urlopen(get_articles_url) as url:
+		articles_results = json.loads(url.read())
+
+
+		articles_object = None
+		if articles_results['articles']:
+			articles_object = process_articles(articles_results['articles'])
+
+	return articles_object
+
+def process_articles(articles_list):
+	'''
+	'''
+	articles_object = []
+	for article_item in articles_list:
+		id = article_item.get('id')
+		author = article_item.get('author')
+		title = article_item.get('title')
+		description = article_item.get('description')
+		url = article_item.get('url')
+		image = article_item.get('urlToImage')
+		date = article_item.get('publishedAt')
+		
+		if image:
+			articles_result = NewsArticle(id,author,title,description,url,image,date)
+			articles_object.append(articles_result)	
+		
+	return articles_object
