@@ -17,7 +17,7 @@ def index():
 
 	return render_template('index.html',title = title, technology = technology,business = business,sports = sports,entertainment = entertainment)
 
-@main.route('/articles/<id>')
+@main.route('/news_articles/<id>')
 def articles(id):
 	'''
 	view articles  page function that returns the articles page and its data
@@ -26,4 +26,4 @@ def articles(id):
 	articles = get_articles(id)
 	title = f'News Room articles | {id}'
 
-	return render_template('articles.html',title= title,articles = articles)
+	return render_template('news_articles.html',title= title,articles = articles)

@@ -4,12 +4,13 @@
 {% block styles%}
 {{ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block content%}
 <div class="container">
 	<!-- Popular movie section  -->
-	<h2>Available Articles</h2>
+	<h2 class="article-heading">Available Articles</h2>
 	{% for article_row in articles | batch(4)%}
 	<div class="row">
 		{% for article in article_row %}
@@ -24,7 +25,8 @@
 					<a href="{{article.url}}" target="_blank"><button class="btn btn-outline-primary">Visit website</button></a>
 				</div>
 				<div class="footer">
-					Published at: {{article.date}}
+					<p>Published on: {{article.date}}</p>
+					<p>Author: {{article.author}}</p>
 				</div>
 			</div>
 		</div>

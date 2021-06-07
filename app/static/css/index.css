@@ -10,8 +10,12 @@ body {
 h2 {
   color: #003459 ;
 }
+.article-heading {
+  text-align: center;
+}
 h1 {
   margin-bottom: 4vh;
+  text-align: center;
 }
 h3 {
   color: #00a8e8 !important;
@@ -58,7 +62,9 @@ img {
   }
 }
 @media (max-width: 1000px) {
-
+  .article {
+    height: auto !important;
+  }
 }
 .navbar {
   background-color: #007ea7;
