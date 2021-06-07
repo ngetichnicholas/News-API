@@ -2,7 +2,7 @@ import unittest
 from app.models import NewsArticle
 class ArticlesTest(unittest.TestCase):
     '''
-    Test Class to test the behaviour of the Movie class
+    Test Class to test the behaviour of the NewsArticle class
     '''
 
     def setUp(self):

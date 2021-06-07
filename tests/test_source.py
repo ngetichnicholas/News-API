@@ -3,7 +3,7 @@ from app.models import NewsSource
 
 class SourcesTest(unittest.TestCase):
     '''
-    Test Class to test the behaviour of the Movie class
+    Test Class to test the behaviour of the NewsSource class
     '''
 
     def setUp(self):
