@@ -2,7 +2,7 @@
 ## Author
 Nicholas Ngetich
 ## Description
-This is a flask application consuming API to fetch and search news resources.
+This is a flask application consuming API to get news sources and retrieve news articles in different sources available
 ![alt text](https://github.com/ngetichnicholas/News-API/blob/main/articles.png)
 ### Prerequisites
 You need to have git installed
